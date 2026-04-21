@@ -31,7 +31,7 @@ class NewVisitorTest(unittest.TestCase):
         inputbox.send_keys(Keys.ENTER)
         time.sleep(1)
 
-        table = self.broser.find_element(By.ID, "id_list_table")
+        table = self.browser.find_element(By.ID, "id_list_table")
         rows = table.find_elements(By.TAG_NAME, "tr")
         self.assertTrue(any(row.text == "1: Buy peacock feathers" for row in rows))
 
