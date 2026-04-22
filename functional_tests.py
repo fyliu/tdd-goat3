@@ -36,9 +36,7 @@ class NewVisitorTest(unittest.TestCase):
         inputbox.send_keys(Keys.ENTER)
         time.sleep(1)
 
-        table = self.browser.find_element(By.ID, "id_list_table")
-        rows = table.find_elements(By.TAG_NAME, "tr")
-        self.assertIn("1: Buy peacock feathers", [row.text for row in rows])
+        self.check_for_row_in_list_table("1: Buy peacock feathers")
 
         # There is still a text box inviting her to add another item. She enters "Use peacock feathers to make a fly" (Edith is very methodical)
         inputbox = self.browser.find_element(By.ID, "id_new_item")
@@ -47,16 +45,8 @@ class NewVisitorTest(unittest.TestCase):
         time.sleep(1)
 
         # The page updates again, and now shows both items on her list
-        table = self.browser.find_element(By.ID, "id_list_table")
-        rows = table.find_elements(By.TAG_NAME, "tr")
-        self.assertIn(
-            "2: Usse peacock feathers to make a fly",
-            [row.text for row in rows],
-        )
-        self.assertIn(
-            "1: Buy peacock feathers",
-            [row.text for row in rows],
-        )
+        self.check_for_row_in_list_table("2: Use peacock feathers to make a fly")
+        self.check_for_row_in_list_table("1: Buy peacock feathers")
 
         # Satisfied, she goes back to sleep
 
