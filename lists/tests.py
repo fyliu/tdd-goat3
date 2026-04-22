@@ -9,4 +9,4 @@ class HomePageTest(TestCase):
 
     def test_renders_homepage_content(self):
         response = self.client.get("/")
-        self.assertContains(response, "To-Do")
+        self.assertContains(response, '<form method="POST">')
