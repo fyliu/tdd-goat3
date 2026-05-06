@@ -12,3 +12,6 @@ def home_page(request):
         "home.html",
         {"items": items},
     )
+
+def view_list(request):
+    return render(request, "home.html")
