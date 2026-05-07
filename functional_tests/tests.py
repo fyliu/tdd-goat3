@@ -124,7 +124,7 @@ class NewVisitorTest(LiveServerTestCase):
         self.wait_for_row_in_list_table("1: testing")
         inputbox = self.browser.find_element(By.ID, "id_new_item")
         self.assertAlmostEqual(
-            inputbox.locatin["x"] + inputbox.size["width"] / 2,
+            inputbox.location["x"] + inputbox.size["width"] / 2,
             512,
             delta=10,
         )
