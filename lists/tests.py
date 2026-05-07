@@ -11,7 +11,7 @@ class HomePageTest(TestCase):
     def test_renders_input_form(self):
         response = self.client.get("/")
         self.assertContains(response, '<form method="POST" action="/lists/new">')
-        self.assertContains(response, '<input name="item_text"')
+        self.assertContains(response, '<input name="item_text" id="id_new_item" placeholder="Enter a to-to item" />')
 
 class ListAndItemModelTest(TestCase):
     def test_saving_and_retrieving_items(self):
