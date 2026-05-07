@@ -1,5 +1,7 @@
 from django.test import LiveServerTestCase
 from selenium import webdriver
+from selenium.webdriver.firefox.service import Service as FirefoxService
+from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import WebDriverException
@@ -10,7 +12,7 @@ MAX_WAIT = 5
 class NewVisitorTest(LiveServerTestCase):
     def setUp(self):
 
-        self.browser = webdriver.Firefox()
+        self.browser = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
 
     def tearDown(self):
         self.browser.quit()
