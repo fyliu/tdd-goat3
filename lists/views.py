@@ -12,4 +12,4 @@ def view_list(request, list_id):
 def new_list(request):
     nulist = List.objects.create()
     Item.objects.create(text=request.POST["item_text"], list=nulist)
-    return redirect("/lists/the-only-list-in-the-world/")
+    return redirect(f"/lists/{nulist.id}/")
