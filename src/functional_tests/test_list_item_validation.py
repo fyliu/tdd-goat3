@@ -13,17 +13,30 @@ class ItemValidationTest(FunctionalTest):
 
         # The home apge refreshes, and there is an error message saying that
         # list items cannot be blank
-        self.assertEqual(
-            self.browser.find_element(By.CSS_SELECTOR, ".invalid-feedback").text,
-            "You can't have an empty list item",
+        self.wait_for(
+            lambda: self.assertEqual(
+                self.browser.find_element(By.CSS_SELECTOR, ".invalid-feedback").text,
+                "You can't have an empty list item",
+            )
         )
 
         # She tries again with some text for the item, which now works
-        self.fail("finish this test!")
+        self.browser.find_element(By.ID, "id_new_item").send_keys("Purchase milk")
+        self.browser.find_element(By.ID, "id_new_item").send_keys(Keys.ENTER)
+        self.wait_for_row_in_list_table("1: Purchase milk")
 
         # Perversely, she now decides to submit a second blank list item
+        self.browser.find_element(By.ID, "id_new_item").send_keys(Keys.ENTER)
 
         # She receives a similar warning on the list page
+        self.wait_for(
+            lambda: self.assertEqual(
+                self.browser.find_element(By.CSS_SELECTOR, ".invalid-feedback").text,
+                "You can't have an empty list item",
+            )
+        )
 
         # And she can correct it by filling some text in
-        self.fail("write me!")
+        self.browser.find_element(By.ID, "id_new_item").send_keys("Make tea")
+        self.browser.find_element(By.ID, "id_new_item").send_keys(Keys.ENTER)
+        self.wait_for_row_in_list_table("2: Make tea")
