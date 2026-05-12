@@ -24,6 +24,16 @@
           ansible.builtin.meta: reset_connection
       when: add_user is changed
 
+    - name: Build container image locally
+      community.docker.docker_image:
+        name: superlists
+        source: build
+        state: present
+        build:
+          path: ..
+          platform: linux/amd64
+        force_source: true
+      delegate_to: 127.0.0.1
     - name: Export container image locally
       community.docker.docker_image:
         name: superlists
