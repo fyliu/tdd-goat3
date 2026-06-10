@@ -24,13 +24,10 @@ def view_list(request, list_id):
     return render(request, "list.html", {"list": our_list, "form": form, "error": error})
 
 def new_list(request):
-    nulist = List.objects.create()
-    item = Item(text=request.POST["text"], list=nulist)
-    try:
-        item.full_clean()
-        item.save()
-    except ValidationError:
-        nulist.delete()
-        error = "You can't have an empty list item"
-        return render(request, "home.html", {"error": error})
-    return redirect(nulist)
+    form = ItemForm(data=request.POST)
+    if form.is_valid():
+        nulist = List.objects.create()
+        item = Item(text=request.POST["text"], list=nulist)
+        return redirect(nulist)
+    else:
+        return render(request, "home.html", {"form": form})

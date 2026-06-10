@@ -19,6 +19,9 @@
             {% if error %}
               <div class="invalid-feedback">{{ error }}</div>
             {% endif %}
+            {% if form.error %}
+              <div class="invalid-feedback">{{ form.errors.text }}</div>
+            {% endif %}
           </form>
         </div>
       </div>
