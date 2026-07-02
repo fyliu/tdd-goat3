@@ -57,6 +57,6 @@ class ListModelTest(TestCase):
         item2 = Item.objects.create(list=list1, text="item2")
         item3 = Item.objects.create(list=list1, text="3")
         self.assertListEqual(
-            list1.item_set.all(),
+            list(list1.item_set.all()),
             [item1, item2, item3],
         )
