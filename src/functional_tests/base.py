@@ -11,17 +11,21 @@ import time
 MAX_WAIT = 5
 
 class FunctionalTest(StaticLiveServerTestCase):
-    def setUp(self):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
         options = Options()
         options.add_argument("--headless")
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
-        self.browser = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()), options=options)
+        cls.browser = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()), options=options)
         if test_server := os.environ.get("TEST_SERVER"):
-            self.live_server_url = "http://" + test_server
+            cls.live_server_url = "http://" + test_server
 
-    def tearDown(self):
-        self.browser.quit()
+    @classmethod
+    def tearDownClass(cls):
+        cls.browser.quit()
+        super().tearDownClass()
 
     def wait_for_row_in_list_table(self, row_text):
         start_time = time.time()
