@@ -1,10 +1,7 @@
-console.log("Spec.js loading");
-
 describe('Superlists JavaScript', () =>{
   let testDiv;
 
   beforeEach(() => {
-    console.log("beforeEach");
     testDiv = document.createElement('div');
     testDiv.innerHTML = `
       <form>
@@ -28,14 +25,11 @@ describe('Superlists JavaScript', () =>{
   })
 
   it("should have a useful html fixture", () => {
-    console.log("in test 1");
-
     const errorMsg = document.querySelector(".invalid-feedback");
     expect(errorMsg.checkVisibility()).toBe(true);
   });
 
   it("should hide error message on input", () => {
-    console.log("in test 2");
     const textInput = document.querySelector("#id_text");
     const errorMsg = document.querySelector(".invalid-feedback");
 
