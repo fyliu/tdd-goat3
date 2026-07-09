@@ -1,8 +1,15 @@
+import logging
 import os
 import pytest
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from webdriver_manager.firefox import GeckoDriverManager
+
+# Enable debug logging for webdriver-manager
+logging.basicConfig(level=logging.DEBUG)
+
+# Suppress Django's request logs (favicon 404s, etc.)
+logging.getLogger("django.server").setLevel(logging.WARNING)
 
 # Pre-warm the cache at session scope
 @pytest.fixture(scope="session", autouse=True)
