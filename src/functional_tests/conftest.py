@@ -11,10 +11,10 @@ logging.basicConfig(level=logging.DEBUG)
 # Suppress Django's request logs (favicon 404s, etc.)
 logging.getLogger("django.server").setLevel(logging.WARNING)
 
-# Pre-warm the cache at session scope
-@pytest.fixture(scope="session", autouse=True)
-def setup_firefox_driver():
-    GeckoDriverManager().install()
+# # Pre-warm the cache at session scope
+# @pytest.fixture(scope="session", autouse=True)
+# def setup_firefox_driver():
+#     GeckoDriverManager().install()
 
 # Create a new browser per test
 @pytest.fixture
