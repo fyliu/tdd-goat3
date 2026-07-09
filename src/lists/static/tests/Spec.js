@@ -39,4 +39,11 @@ describe('Superlists JavaScript', () =>{
     expect(errorMsg.checkVisibility()).toBe(false);
   });
 
+  it("should not hide error message before event is fired", () => {
+    const errorMsg = document.querySelector(".invalid-feedback");
+
+    initialize();
+    expect(errorMsg.checkVisibility()).toBe(true);
+  });
+
 });
